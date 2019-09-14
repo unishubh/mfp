@@ -1,0 +1,25 @@
+{
+	"profile": {
+		"greeting": "profile.greeting"
+	},
+	"menu": {
+		"support": "menu.support",
+		"order": "menu.order",
+		"help": "menu.help",
+		"suggestion": "menu.suggestion",
+		"shop": "menu.shop",
+		"plan": "menu.plan",
+		"invest": "menu.invest"
+	},
+	"care": {
+		"help": "care.help"
+	},
+	"fallback": {
+		"any": "fallback.any"
+	},
+	"get_started": {
+		"guidance": "get_started.guidance",
+		"help": "get_started.help",
+		"welcome": "get_started.welcome"
+	}
+}

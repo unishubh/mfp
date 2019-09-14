@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+
+    var uid = 5;
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if ( d.getElementById(id) ) {
+            return;
+        }
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//connect.facebook.com/en_US/messenger.Extensions.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, "script", "Messenger"));
+
+    window.extAsyncInit = function () {
+        // the Messenger Extensions JS SDK is done loading
+        MessengerExtensions.getContext("479986662587387",function success (uids) {
+            console.log("Getting uid00");
+            uid = uids.psid;
+         //    alert(uids.psid)
+
+        });
+
+    };
+
+
+
+
+</script>
+<form id="myForm">
+    <input type="text" name="pan" placeholder="PAN">
+    <input type="text" name="ifsc" placeholder="IFSC">
+    <input type="text" name="name" placeholder="Name">
+    <input type="text" name="address" placeholder="Address">
+    <input type="date" name="dob" placeholder="Date of Birth">
+    <input type="text" name="nominee_name" placeholder="Nominee Name">
+    <input type="tel" name="mobile" placeholder="Mobile Number">
+    <input type="email" name="email" placeholder="Email ID">
+    <input type="text" name="bank" placeholder="Bank Account Number">
+
+
+</form>
+<button onclick="submit()">Submit</button>
+<script>
+    function submit () {
+
+
+        //  alert("pritin");
+        console.log("printing");
+        let form = document.getElementById('myForm');
+        let data = {
+            pan: form.elements['pan'].value,
+            ifsc: form.elements['ifsc'].value,
+            name: form.elements['name'].value,
+            address: form.elements['address'].value,
+            dob: form.elements['dob'].value,
+            nominee_name: form.elements['nominee_name'].value,
+            mobile: form.elements['mobile'].value,
+            email: form.elements['email'].value,
+            bank: form.elements['bank'].value,
+            uid: uid,
+        };
+        MessengerExtensions.requestCloseBrowser(function success () {
+            $.post(' https://tough-crab-46.localtunnel.me/close', data);
+
+            alert(data.uid);
+        }, function error (err) {
+            // an error occurred
+        });
+
+
+    }
+</script>
+</body>
+</html>
+
+
+<!--<!DOCTYPE html>-->
+<!--<html>-->
+<!--<body>-->
+
+<!--        <form id="myForm">-->
+<!--            <input type="text" name="pan">-->
+<!--            <input type="text" name="ifsc">-->
+
+<!--        </form>-->
+<!--        <button onclick="myFunction()">Submit</button>-->
+
+<!--<button onclick="myFunction()">Click me</button>-->
+
+<!--<p id="demo"></p>-->
+
+<!--<script>-->
+<!--    function myFunction() {-->
+<!--        document.getElementById("demo").innerHTML = "Hello World";-->
+<!--    }-->
+<!--</script>-->
+
+<!--</body>-->
+</html>

@@ -1,3 +1,5 @@
+const config = require('../services/config')
+const GraphAPi = require('../services/graph-api')
 let profile = async (req, res) => {
     let token = req.query["verify_token"];
     let mode = req.query["mode"];
@@ -5,7 +7,7 @@ let profile = async (req, res) => {
     if (!config.webhookUrl.startsWith("https://")) {
         res.status(200).send("ERROR - Need a proper API_URL in the .env file");
     }
-    var Profile = require("./services/profile.js");
+    var Profile = require("../services/profile.js");
     Profile = new Profile();
 
     // Checks if a token and mode is in the query string of the request
@@ -17,11 +19,11 @@ let profile = async (req, res) => {
                     `<p>Set app ${config.appId} call to ${config.webhookUrl}</p>`
                 );
             }
-            if (mode == "profile" || mode == "all") {
+            if (mode == "profile" || mode=="all") {
                 Profile.setThread();
                 res.write(`<p>Set Messenger Profile of Page ${config.pageId}</p>`);
             }
-            if (mode == "personas" || mode == "all") {
+            if (mode == "personas") {
                 Profile.setPersonas();
                 res.write(`<p>Set Personas for ${config.appId}</p>`);
                 res.write(
@@ -35,11 +37,11 @@ let profile = async (req, res) => {
                 res.write(`<li>PERSONA_SALES = ${config.personaSales.id}</li>`);
                 res.write("</ul>");
             }
-            if (mode == "nlp" || mode == "all") {
+            if (mode === "nlp" || mode === "all") {
                 GraphAPi.callNLPConfigsAPI();
                 res.write(`<p>Enable Built-in NLP for Page ${config.pageId}</p>`);
             }
-            if (mode == "domains" || mode == "all") {
+            if (mode === "domains" || mode === "all") {
                 Profile.setWhitelistedDomains();
                 res.write(`<p>Whitelisting domains: ${config.whitelistedDomains}</p>`);
             }
@@ -54,6 +56,6 @@ let profile = async (req, res) => {
     }
 };
 
-export {
+module.exports= {
     profile,
 }

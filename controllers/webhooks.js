@@ -1,4 +1,11 @@
+const config = require('../services/config');
+const GraphAPi = require('../services/graph-api');
+const i18n = require('../i18n.config');
+const Receive = require('../services/receive');
+var users = {};
+const User = require('../services/user');
 let webhookHandler  = async (req, res) => {
+    console.log('webhook');
     let body = req.body;
 
     // Checks if this is an event from a page subscription
@@ -87,7 +94,7 @@ let webHookVerifier = async (req, res) => {
     }
 };
 
-export {
+module.exports = {
     webhookHandler,
     webHookVerifier
 }
