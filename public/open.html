@@ -8,28 +8,28 @@
 <body>
 <script>
 
-    var uid = 5;
-    (function (d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if ( d.getElementById(id) ) {
-            return;
-        }
-        js = d.createElement(s);
-        js.id = id;
-        js.src = "//connect.facebook.com/en_US/messenger.Extensions.js";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, "script", "Messenger"));
-
-    window.extAsyncInit = function () {
-        // the Messenger Extensions JS SDK is done loading
-        MessengerExtensions.getContext("479986662587387",function success (uids) {
-            console.log("Getting uid00");
-            uid = uids.psid;
-         //    alert(uids.psid)
-
-        });
-
-    };
+    // var uid = 5;
+    // (function (d, s, id) {
+    //     var js, fjs = d.getElementsByTagName(s)[0];
+    //     if ( d.getElementById(id) ) {
+    //         return;
+    //     }
+    //     js = d.createElement(s);
+    //     js.id = id;
+    //     js.src = "//connect.facebook.com/en_US/messenger.Extensions.js";
+    //     fjs.parentNode.insertBefore(js, fjs);
+    // }(document, "script", "Messenger"));
+    //
+    // window.extAsyncInit = function () {
+    //     // the Messenger Extensions JS SDK is done loading
+    //     MessengerExtensions.getContext("479986662587387",function success (uids) {
+    //         console.log("Getting uid00");
+    //         uid = uids.psid;
+    //      //    alert(uids.psid)
+    //
+    //     });
+    //
+    // };
 
 
 
@@ -66,15 +66,15 @@
             mobile: form.elements['mobile'].value,
             email: form.elements['email'].value,
             bank: form.elements['bank'].value,
-            uid: uid,
+            uid: 5,
         };
-        MessengerExtensions.requestCloseBrowser(function success () {
-            $.post(' https://tough-crab-46.localtunnel.me/close', data);
-
-            alert(data.uid);
-        }, function error (err) {
-            // an error occurred
-        });
+        // MessengerExtensions.requestCloseBrowser(function success () {
+        //     $.post(' https://https://slippery-dodo-71.localtunnel.me/close', data);
+        //
+        //     alert(data.uid);
+        // }, function error (err) {
+        //     // an error occurred
+        // });
 
 
     }

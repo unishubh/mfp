@@ -4,6 +4,7 @@
 const Response = require("./response");
 const config = require("./config");
 const i18n = require("../i18n.config");
+const links = require("../constants/payloads");
 
 module.exports = class Curation {
     constructor (user, webhookEvent) {
@@ -13,7 +14,7 @@ module.exports = class Curation {
 
     handlePayload (payload) {
         let response;
-        let outfit;
+
 
         switch ( payload ) {
 
@@ -33,7 +34,7 @@ module.exports = class Curation {
 
 
             case "INVEST_NEW":
-                response = Response.genQuickReply(i18n.__("invest.prompt"), [
+                response = Response.genQuickReply(i18n.__("invest.action"), [
                     {
                         title: i18n.__("invest.register"),
                         payload: "INVEST_REGISTER"
@@ -50,7 +51,7 @@ module.exports = class Curation {
                 break;
 
             case "INVEST_EXISTING":
-                response = Response.genQuickReply(i18n.__("invest.prompt"), [
+                response = Response.genQuickReply(i18n.__("invest.action"), [
                     {
                         title: i18n.__("invest.portfolio"),
                         payload: "INVEST_PORTFOLIO"
@@ -76,6 +77,24 @@ module.exports = class Curation {
             case "INVEST_PORTFOLIO":
                 break;
             case "INVEST_REGISTER":
+                break;
+            case"INVEST_TAX" :
+                response = this.generateInvestmentOptionResponse(payload);
+                break;
+            case"INVEST_LIQUID" :
+                response = this.generateInvestmentOptionResponse(payload);
+                break;
+            case"INVEST_MIDCAP" :
+                response = this.generateInvestmentOptionResponse(payload);
+                break;
+            case"INVEST_SMALLCAP" :
+                response = this.generateInvestmentOptionResponse(payload);
+                break;
+            case"INVEST_LARGECAP" :
+                response = this.generateInvestmentOptionResponse(payload);
+                break;
+            case"INVEST_MULTICAP" :
+                response = this.generateInvestmentOptionResponse(payload);
                 break;
 
 
@@ -153,6 +172,23 @@ module.exports = class Curation {
         ]);
         return response;
     }
+
+    generateInvestmentOptionResponse (payload) {
+        let buttons = [
+            Response.genWebUrlButton(
+                links.fundsLink[payload].title,
+                links.fundsLink[payload].url,
+            )
+        ];
+
+        return Response.genGenericTemplate(
+            links.fundsLink[payload].image,
+            links.fundsLink[payload].title,
+            links.fundsLink[payload].subtitle,
+            buttons
+        );
+    }
+
 
     randomOutfit () {
         let occasion = [ "work", "party", "dinner" ];

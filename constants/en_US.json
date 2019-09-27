@@ -81,13 +81,15 @@
 		"wealth": "Plan for wealth creation"
 	},
 	"invest": {
-		"prompt": "prompt for invest",
+		"prompt": "Are you already an investor or a new investor?",
 		"existing": "Existing Member",
 		"new": "New Member",
 		"portfolio": "Portfolio",
 		"choose_funds": "Choose funds",
 		"open_investment_account": "Open Account",
-		"register": "Register"
+		"register": "Register",
+		"invest_action": "What do you wanna do today?",
+		"action": "invest.action"
 	},
 	"open_invest_account": {
 		"link": "Fill the form",
@@ -99,11 +101,11 @@
 		"failure": "Failed"
 	},
 	"choose": {
-		"tax": "choose.tax",
-		"liquid": "choose.liquid",
-		"midcap": "choose.midcap",
-		"largecap": "choose.largecap",
-		"smallcap": "choose.smallcap",
-		"multicap": "choose.multicap"
+		"tax": "Tax Saving Funds",
+		"liquid": "Liquid Funds",
+		"midcap": "Midcap Funds",
+		"largecap": "Largecap Funds",
+		"multicap": "Multicap Funds",
+		"smallcap": "Smallcap Funds"
 	}
 }
