@@ -1,6 +1,7 @@
 "use strict";
 
-const i18n = require ("../i18n.config");
+const i18n = require("../i18n.config");
+const utils = require("../utils/utils");
 
 module.exports = class Response {
     static genQuickReply (text, quickReplies) {
@@ -9,8 +10,8 @@ module.exports = class Response {
             quick_replies: []
         };
 
-        for (let quickReply of quickReplies) {
-            response["quick_replies"].push ({
+        for ( let quickReply of quickReplies ) {
+            response["quick_replies"].push({
                 content_type: "text",
                 title: quickReply["title"],
                 payload: quickReply["payload"]
@@ -107,6 +108,16 @@ module.exports = class Response {
         let response = {
             type: "web_url",
             title: title,
+            url: url
+        };
+
+        return response;
+    }
+
+    static genWebUrlButtonExtension (title, url) {
+        let response = {
+            type: "web_url",
+            title: title,
             url: url,
             messenger_extensions: true
         };
@@ -114,30 +125,44 @@ module.exports = class Response {
         return response;
     }
 
-    static genNuxMessage (user) {
-        let welcome = this.genText (
-            i18n.__ ("get_started.welcome", {
-                userFirstName: user.firstName
+    static genPhoneButton (title, phoneNumber) {
+        let response = {
+            type: "phone_number",
+            title,
+            payload: phoneNumber
+        }
+        return response;
+    }
+
+    static async genNuxMessage (user) {
+
+
+        let welcome = this.genText(
+            i18n.__("get_started.welcome", {
+                userFirstName: user.firstName,
+                greetings: await utils.getGreetings()
             })
         );
 
-        let guide = this.genText (i18n.__ ("get_started.guidance"));
 
-        let curation = this.genQuickReply (i18n.__ ("get_started.help"), [
+        let intro = this.genText(i18n.__("get_started.intro", {
+            botName: "MoneyBhai"
+        }));
+
+        let isInvestor = this.genQuickReply(i18n.__("get_started.question"), [
             {
-                title: i18n.__ ("menu.plan"),
-                payload: "PLAN"
+                title: "Already an investor",
+                payload: "OLD"
             },
             {
-                title: i18n.__ ("menu.invest"),
-                payload: "INVEST"
-            },
-            {
-                title: i18n.__ ("menu.support"),
-                payload: "TALK"
+                title: "New to investment",
+                payload: "NEW"
             }
-        ]);
 
-        return [welcome, guide, curation];
+        ]);
+        let nuxMessages = [ welcome, intro, isInvestor ];
+
+
+        return nuxMessages;
     }
 };

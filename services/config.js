@@ -106,7 +106,7 @@ module.exports = {
     },
 
     get whitelistedDomains() {
-        return [this.appUrl, this.shopUrl];
+        return [this.appUrl, this.shopUrl, 'http://www.mutualfundcalculators.com', 'https://trinityinvestcon.com', 'https://www.smartscribs.com'];
     },
 
     checkEnvVariables: function() {

@@ -2,75 +2,73 @@ const config = require('../services/config');
 const GraphAPi = require('../services/graph-api');
 const i18n = require('../i18n.config');
 const Receive = require('../services/receive');
-var users = {};
-const User = require('../services/user');
-let webhookHandler  = async (req, res) => {
+const Investcon = require('../services/investcon');
+let {User, users} = require('../services/user');
+//const users = User.users;
+
+let webhookHandler = async (req, res) => {
     console.log('webhook');
     let body = req.body;
 
-    // Checks if this is an event from a page subscription
-    if (body.object === "page") {
-        // Returns a '200 OK' response to all requests
-        res.status (200).send ("EVENT_RECEIVED");
+    if ( body.object === "page" ) {
+        res.status(200).send("EVENT_RECEIVED");
 
-        // Iterates over each entry - there may be multiple if batched
-        body.entry.forEach (function (entry) {
-            // Gets the body of the webhook event
+        body.entry.forEach(function (entry) {
             let webhookEvent = entry.messaging[0];
-            // console.log(webhookEvent);
-
-            // Discard uninteresting events
-            if ("read" in webhookEvent) {
-                 console.log("Got a read event");
+            if ( "read" in webhookEvent ) {
+                console.log("Got a read event");
                 return;
             }
 
-            if ("delivery" in webhookEvent) {
-                 console.log("Got a delivery event");
+            if ( "delivery" in webhookEvent ) {
+                console.log("Got a delivery event");
                 return;
             }
 
-            // Get the sender PSID
             let senderPsid = webhookEvent.sender.id;
 
-            if (!(senderPsid in users)) {
-                let user = new User (senderPsid);
+            if ( !(senderPsid in users) ) {
+                let user = new User(senderPsid);
 
-                GraphAPi.getUserProfile (senderPsid)
-                    .then (userProfile => {
-                        user.setProfile (userProfile);
+                 GraphAPi.getUserProfile(senderPsid)
+                    .then(userProfile => {
+                        user.setProfile(userProfile);
                     })
-                    .catch (error => {
+
+                    .catch(error => {
                         // The profile is unavailable
-                        console.log ("Profile is unavailable:", error);
+                        console.log("Profile is unavailable:", error);
                     })
-                    .finally (() => {
+                    .finally(async () => {
+                        user.isMember = await Investcon.isMember(senderPsid);
                         users[senderPsid] = user;
-                        i18n.setLocale (user.locale);
-                        console.log (
+                        i18n.setLocale(user.locale);
+                        console.log(
                             "New Profile PSID:",
                             senderPsid,
                             "with locale:",
-                            i18n.getLocale ()
+                            i18n.getLocale()
                         );
                         let receiveMessage = new Receive (users[senderPsid], webhookEvent);
                         return receiveMessage.handleMessage ();
+
                     });
             } else {
-                i18n.setLocale (users[senderPsid].locale);
-                console.log (
+                i18n.setLocale(users[senderPsid].locale);
+                console.log(
                     "Profile already exists PSID:",
                     senderPsid,
                     "with locale:",
-                    i18n.getLocale ()
+                    i18n.getLocale()
                 );
-                let receiveMessage = new Receive (users[senderPsid], webhookEvent);
-                return receiveMessage.handleMessage ();
+                let receiveMessage = new Receive(users[senderPsid], webhookEvent);
+                return receiveMessage.handleMessage();
             }
+
         });
     } else {
         // Returns a '404 Not Found' if event is not from a page subscription
-        res.sendStatus (404);
+        res.sendStatus(404);
     }
 };
 
@@ -81,9 +79,9 @@ let webHookVerifier = async (req, res) => {
     let challenge = req.query["hub.challenge"];
 
     // Checks if a token and mode is in the query string of the request
-    if (mode && token) {
+    if ( mode && token ) {
         // Checks the mode and token sent is correct
-        if (mode === "subscribe" && token === config.verifyToken) {
+        if ( mode === "subscribe" && token === config.verifyToken ) {
             // Responds with the challenge token from the request
             console.log("WEBHOOK_VERIFIED");
             res.status(200).send(challenge);
@@ -94,7 +92,23 @@ let webHookVerifier = async (req, res) => {
     }
 };
 
+
+let riskHandler = async (req, res) => {
+    let psid = req.body.psid;
+    let roi = req.body.roi;
+    if ( !psid in users ) {
+        console.log("Invalid user ID");
+        res.sendStatus(400);
+    } else {
+        console.log(users[psid]);
+        users[psid].setRoi(roi);
+        res.sendStatus(200);
+    }
+};
+
 module.exports = {
     webhookHandler,
-    webHookVerifier
+    webHookVerifier,
+    users,
+    riskHandler,
 }

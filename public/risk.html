@@ -1,0 +1,84 @@
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+
+<script>
+    var uid = -99;
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if ( d.getElementById(id) ) {
+            return;
+        }
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//connect.facebook.com/en_US/messenger.Extensions.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, "script", "Messenger"));
+
+    window.extAsyncInit = function () {
+        // the Messenger Extensions JS SDK is done loading
+        MessengerExtensions.getContext("479986662587387", function success (uids) {
+            console.log("Getting uid00");
+            uid = uids.psid;
+            //    alert(uids.psid)
+
+        });
+
+    };
+</script>
+<body>
+<div class="col-sm-12">
+    <form id="riskForm">
+        <div class="radio">
+            <h3>This is a question</h3>
+            <label>
+                <input type="radio" name="o1" value="1">
+                <span class="cr"><i class="cr-icon glyphicon glyphicon-ok-sign"></i></span>
+                Option one is this and that — be sure to include why it's great
+            </label>
+        </div>
+        <div class="radio">
+            <label>
+                <input type="radio" name="o1" value="2" checked>
+                <span class="cr"><i class="cr-icon glyphicon glyphicon-ok-sign"></i></span>
+                Option two is checked by default
+            </label>
+        </div>
+        <div class="container">
+            <label>
+                Enter the risk percentage
+            </label>
+            <input type="text" name="roi" id="roi">
+        </div>
+    </form>
+    <button onclick="submit()">Submit</button>
+</div>
+<script>
+    function submit () {
+        console.log("f");
+        let form = document.getElementById("riskForm");
+        let opt = form.elements['o1'].value;
+        let data = {
+            roi: form.elements['roi'].value,
+            uid: uid,
+        };
+        MessengerExtensions.requestCloseBrowser(function success () {
+            $.post('http://localhost:3000/risk', data);
+
+            alert(data.uid);
+        }, function error (err) {
+            // an error occurred
+        });
+    }
+</script>
+</body>
+</html>

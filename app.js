@@ -6,14 +6,12 @@ const crypto = require("crypto");
 const path = require("path");
 const Receive = require("./services/receive");
 const GraphAPi = require("./services/graph-api");
-//const User = require ("./services/user");
+const User = require ("./services/user");
 const config = require("./services/config");
 const i18n = require("./i18n.config");
 const app = express();
 const webhooks = require('./controllers/webhooks');
 const profile = require('./controllers/profile');
-
-var users = {};
 
 // Parse application/x-www-form-urlencoded
 app.use(
@@ -22,39 +20,26 @@ app.use(
     })
 );
 
-// Parse application/json. Verify that callback came from Facebook
 app.use(json({verify: verifyRequestSignature}));
-
-// Serving static files in Express
 app.use(express.static(path.join(path.resolve(), "public")));
-
-// Set template engine in Express
 app.set("view engine", "ejs");
-
-// Respond with index file when a GET request is made to the homepage
 app.get("/", function (_req, res) {
     res.render("index");
 });
 
-// Adds support for GET requests to our webhook
+//Add the apis
 app.get("/webhook", webhooks.webHookVerifier);
-
-// Creates the endpoint for your webhook
 app.post("/webhook", webhooks.webhookHandler);
-
-// Set up your App's Messenger Profile
 app.get("/profile", profile.profile);
-
+app.post("/risk", webhooks.riskHandler);
 app.post('/close', function (req, res) {
 
-    let user = {
-        psid: req.body.uid,
-    };
-    req.body.user = user;
     req.body.formCallBack = true;
-    req.body.success = true;
+    req.body.formType = "SERVICE";
+    res.status(200).send("Recieved");
     console.log(req.body);
-    let receiveMessage = new Receive(req.body.user, req.body);
+    let userObj = User.getUser(req.body.data.uid);
+    let receiveMessage = new Receive(userObj, req.body);
     return receiveMessage.handleMessage();
 
 })
