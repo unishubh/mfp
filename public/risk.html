@@ -71,13 +71,17 @@
             roi: form.elements['roi'].value,
             uid: uid,
         };
-        MessengerExtensions.requestCloseBrowser(function success () {
-            $.post('http://localhost:3000/risk', data);
-
-            alert(data.uid);
-        }, function error (err) {
-            // an error occurred
-        });
+        $.post("/risk",
+            {
+                data:data,
+            },
+            function(data,status){
+                alert("Data: " + data + "\nStatus: " + status);
+                MessengerExtensions.requestCloseBrowser(function success () {
+                }, function error (err) {
+                    console.log(err);
+                });
+            });
     }
 </script>
 </body>

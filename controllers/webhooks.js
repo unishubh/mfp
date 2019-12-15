@@ -30,7 +30,7 @@ let webhookHandler = async (req, res) => {
             if ( !(senderPsid in users) ) {
                 let user = new User(senderPsid);
 
-                 GraphAPi.getUserProfile(senderPsid)
+                GraphAPi.getUserProfile(senderPsid)
                     .then(userProfile => {
                         user.setProfile(userProfile);
                     })
@@ -49,8 +49,8 @@ let webhookHandler = async (req, res) => {
                             "with locale:",
                             i18n.getLocale()
                         );
-                        let receiveMessage = new Receive (users[senderPsid], webhookEvent);
-                        return receiveMessage.handleMessage ();
+                        let receiveMessage = new Receive(users[senderPsid], webhookEvent);
+                        return receiveMessage.handleMessage();
 
                     });
             } else {
@@ -94,16 +94,28 @@ let webHookVerifier = async (req, res) => {
 
 
 let riskHandler = async (req, res) => {
-    let psid = req.body.psid;
-    let roi = req.body.roi;
-    if ( !psid in users ) {
-        console.log("Invalid user ID");
-        res.sendStatus(400);
-    } else {
-        console.log(users[psid]);
-        users[psid].setRoi(roi);
-        res.sendStatus(200);
-    }
+    let psid = req.body.data.psid;
+    let roi = req.body.data.roi;
+
+    res.status(200).send("Recieved");
+    let userObj = users[req.body.data.uid];
+    req.body.formCallBack = true;
+    req.body.formType = "RISK";
+    let receiveMessage = new Receive(userObj, req.body);
+    return receiveMessage.handleMessage();
+
+
+};
+
+
+let investFormHandler = async (req, res) => {
+    req.body.formCallBack = true;
+    req.body.formType = "INVESTMENT";
+    res.status(200).send("Recieved");
+    console.log(req.body);
+    let userObj = users[req.body.data.uid];
+    let receiveMessage = new Receive(userObj, req.body);
+    return receiveMessage.handleMessage();
 };
 
 module.exports = {
@@ -111,4 +123,5 @@ module.exports = {
     webHookVerifier,
     users,
     riskHandler,
-}
+    investFormHandler,
+};

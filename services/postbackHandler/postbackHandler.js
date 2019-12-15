@@ -7,7 +7,7 @@ module.exports = class PostbackHandler {
     }
 
     getHandler () {
-        console.log("Resonse payload from quick reply ", payload);
+        console.log("Hsndling payoad ");
         return this.handlePostback();
 
     }

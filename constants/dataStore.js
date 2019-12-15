@@ -61,6 +61,7 @@ module.exports.fundsLink = {
 };
 
 module.exports.servieForm = "open.html";
+module.exports.investmentForm = "openInvestment.html";
 module.exports.GenericTemplateImage = fundLinkImage;
 module.exports.phone = "8989529628";
 module.exports.androidUrl = "https://www.smartscribs.com";
@@ -68,3 +69,10 @@ module.exports.iosUrl = "https://www.smartscribs.com";
 module.exports.calculatorLink = 'http://www.mutualfundcalculators.com';
 module.exports.otherInvestmentsLink = "https://trinityinvestcon.com/investment/mutual_funds/top-mf.html";
 module.exports.website = "trinityinvestcon.com";
+module.exports.goals = [
+    { name: "Retirement Planning", url: "https://www.smartscribs.com"},
+    { name: "Wealth Planning", url: "https://www.smartscribs.com"},
+        //{name: "Kids Planning", url: "https://www.smartscribs.com"},
+       {name: "Sip Planning", url: "https://www.smartscribs.com"},
+        // {name: "EMI Planning", url: "https://www.smartscribs.com"},
+    ];

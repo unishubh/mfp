@@ -7,9 +7,11 @@ const Risk = require("./risk");
 const Existing = require("./Existing");
 const Service = require("./service");
 const Explore = require("./explore");
+const NewUser = require("./newUser");
+const Goal = require("./goal");
 
 const Response = require("../response");
-const GraphAPi  = require("../graph-api");
+const GraphAPi = require("../graph-api");
 
 module.exports = class QuickReplyHandler {
     constructor (user, webhookEvent) {
@@ -56,13 +58,17 @@ module.exports = class QuickReplyHandler {
         } else if ( payload.includes("CALCULATOR") ) {
             handler = new Calculator(this.user, this.webhookEvent);
 
-        } else if (payload.includes("OLD")){
+        } else if ( payload.includes("OLD") ) {
             handler = new Existing(this.user, this.webhookEvent);
-        }else if (payload.includes("SERVICE")) {
+        } else if ( payload.includes("SERVICE") ) {
             handler = new Service(this.user, this.webhookEvent);
-        } else if (payload.includes("EXPLORE")) {
+        } else if ( payload.includes("EXPLORE") ) {
             handler = new Explore(this.user, this.webhookEvent);
-        }else{
+        } else if ( payload.includes("NEW") ) {
+            handler = new NewUser(this.user, this.webhookEvent);
+        } else if ( payload.includes("GOAL") ) {
+            handler = new Goal(this.user, this.webhookEvent);
+        } else {
             response = {
                 text: `This is a default postback message for payload: ${ payload }!`
             };

@@ -15,23 +15,19 @@ module.exports = class Explore {
 
     async handlePayload (payload) {
         let response;
-        response = Response.genQuickReply("Please select the appropriate option", [
-            {
-                title:"SIP Calculator",
-                payload:"CALCULATOR"
-            },
-            {
-                title: "EMI Calculator",
-                payload: "CALCULATOR"
-            },
-            {
-                title: "Goal Planning",
-                payload: "GOAL"
-            }
+        response = Response.genButtonTemplate("Want to explore more options ?", [
+            Response.genPostbackButton("SIP Calculator", "CALCULATOR"),
+            Response.genPostbackButton("EMI Calculator", "CALCULATOR"),
+            Response.genPostbackButton("Goal Planning","GOAL")
+        ]);
+
+        let studyTemplate = Response.genButtonTemplate("Know more about Mutual Funds", [
+            Response.genWebUrlButton("Blog", "https://www.smartscribs.com"),
+            Response.genWebUrlButton("Videos", "https://www.smartscribs.com")
         ]);
         let template = await templates.shareTemplate();
 
-        return [response, template];
+        return [ studyTemplate, template, response ];
 
 
     }

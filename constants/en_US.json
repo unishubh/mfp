@@ -55,5 +55,13 @@
 		"register": "invest.register",
 		"choose_funds": "invest.choose_funds",
 		"open_investment_account": "invest.open_investment_account"
+	},
+	"Open account form": "Open account form",
+	"plan": {
+		"prompt": "plan.prompt",
+		"education": "plan.education",
+		"sip": "plan.sip",
+		"retirement": "plan.retirement",
+		"wealth": "plan.wealth"
 	}
 }

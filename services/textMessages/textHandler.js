@@ -27,13 +27,10 @@ module.exports = class TextHandler {
            message.includes("start over")
        ) {
            response = Response.genNuxMessage(this.user);
-       } else if (this.webhookEvent.message.text == "test") {
-           let button = Response.genWebUrlButtonExtension(
-               i18n.__("service.prompt"),
-               config.shopUrl + '/' + dataStore.servieForm,
-           );
-
-           return Response.genButtonTemplate("Please fill out this form", [button]);
+       } else if (this.webhookEvent.message.text === "test") {
+           let buttons = [];
+           buttons = dataStore.goals.map(goal => Response.genWebUrlButton(goal.name, goal.url));
+           return Response.genButtonTemplate("Please choose an appropriate option", buttons);
        }else {
            response = [
                Response.genText(
