@@ -12,6 +12,9 @@ class User {
         this.isMember = false;
         this.risk = "";
         this.roi = 0;
+        this.secondLastCommand = "";
+        this.lastCommand = "";
+        this.presentCommand = "";
     }
 
     setProfile (profile) {
@@ -19,6 +22,7 @@ class User {
         this.lastName = profile.lastName;
         this.locale = profile.locale;
         this.timezone = profile.timezone;
+        this.presentCommand = "NUX";
         if ( profile.gender ) {
             this.gender = profile.gender;
         }
@@ -30,14 +34,22 @@ class User {
     setRoi (roi) {
         this.roi = roi;
     }
-};
+
+    setLastCommand (command) {
+        this.lastCommand = command;
+    }
+
+    setPresentCommand (command) {
+        this.presentCommand = command;
+    }
+}
 let users = {};
 let getUser = (psid) => {
     return users[psid];
-}
+};
 module.exports = {
     User,
     getUser,
     users
-}
+};
 

@@ -6,7 +6,7 @@ const crypto = require("crypto");
 const path = require("path");
 const Receive = require("./services/receive");
 const GraphAPi = require("./services/graph-api");
-const User = require ("./services/user");
+const User = require("./services/user");
 const config = require("./services/config");
 const i18n = require("./i18n.config");
 const app = express();
@@ -42,7 +42,8 @@ app.post('/close', function (req, res) {
     let receiveMessage = new Receive(userObj, req.body);
     return receiveMessage.handleMessage();
 
-})
+});
+app.post("/investForm", webhooks.investFormHandler);
 
 // Verify that the callback came from Facebook.
 function verifyRequestSignature (req, res, buf) {

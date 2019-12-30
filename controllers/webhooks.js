@@ -49,11 +49,26 @@ let webhookHandler = async (req, res) => {
                             "with locale:",
                             i18n.getLocale()
                         );
+                        users[senderPsid].presentCommand = webhookEvent;
                         let receiveMessage = new Receive(users[senderPsid], webhookEvent);
                         return receiveMessage.handleMessage();
 
                     });
             } else {
+                users[senderPsid].secondLastCommand = users[senderPsid].lastCommand;
+                users[senderPsid].lastCommand = users[senderPsid].presentCommand;
+                users[senderPsid].presentCommand = webhookEvent;
+                if ( isBackCommand(webhookEvent) ) {
+                    if ( users[senderPsid].secondLastCommand !== "" ) {
+                        let receiveMessage = new Receive(users[senderPsid], users[senderPsid].secondLastCommand);
+                        return receiveMessage.handleMessage();
+                    } else {
+                        let receiveMessage = new Receive(users[senderPsid], users[senderPsid].lastCommand);
+                        return receiveMessage.handleMessage();
+                    }
+
+                }
+
                 i18n.setLocale(users[senderPsid].locale);
                 console.log(
                     "Profile already exists PSID:",
@@ -116,6 +131,16 @@ let investFormHandler = async (req, res) => {
     let userObj = users[req.body.data.uid];
     let receiveMessage = new Receive(userObj, req.body);
     return receiveMessage.handleMessage();
+};
+let isBackCommand = (webhookEvent) => {
+
+    try {
+        return webhookEvent.message.text.toLowerCase() === "back";
+
+    } catch ( e ) {
+        return false;
+
+    }
 };
 
 module.exports = {

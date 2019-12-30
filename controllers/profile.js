@@ -13,7 +13,7 @@ let profile = async (req, res) => {
     // Checks if a token and mode is in the query string of the request
     if (mode && token) {
         if (token === config.verifyToken) {
-            if (mode == "webhook" || mode == "all") {
+            if (mode === "webhook" || mode === "all") {
                 Profile.setWebhook();
                 res.write(
                     `<p>Set app ${config.appId} call to ${config.webhookUrl}</p>`

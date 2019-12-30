@@ -20,11 +20,19 @@ module.exports = class Investment {
             case "OPEN_INVESTMENT_ACCOUNT":
                 let button = Response.genWebUrlButtonExtension(
                     i18n.__("Open account form"),
-                    config.shopUrl + '/' + links    .investmentForm,
+                    config.shopUrl + '/' + links.investmentForm,
                 );
-
                 response = Response.genButtonTemplate("Please fill out this form", [ button ]);
+                break;
+                
+            case "INVEST": //TODO add investment options here
+                let web = await templates.investTemplateWebsite();
+                let mobile = await templates.investmentTemplateMobile();
+                let movingOut = templates.MovingOutTemplate();
+                response = [ mobile, web, movingOut ];
+                //response = web;
 
+                break;
         }
 
         return response;
