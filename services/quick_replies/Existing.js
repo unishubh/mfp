@@ -24,8 +24,8 @@ module.exports = class Existing {
                 payload: "INVEST"
             },
             {
-                title: i18n.__("old.explore"),
-                payload: "EXPLORE"
+                title: i18n.__("old.assist"),
+                payload: "ASSIST"
             }
         ]);
         return response;

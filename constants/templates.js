@@ -13,9 +13,10 @@ module.exports.generateInstantServiceTemplate = async () => {
     let appButtons = await getAppButtons();
     let buttons = [ callButton, whatsAppButton ];
     let appTemp = Response.genButtonTemplate("You can also try our app", appButtons);
+    let text = Response.genText("Thanks for showing Interest in Investment with us , someone from the team will contact you in the next 24 Hour.\n")
     let abs = Response.genGenericTemplate(dataStore.GenericTemplateImage, i18n.__("service.title"), "", buttons);
-    return [ abs, appTemp ];
-}
+    return [ text, abs, appTemp ];
+};
 
 module.exports.generateServiceResponseTemplate = async () => {
 
@@ -47,10 +48,10 @@ module.exports.investTemplateWebsite = async () => {
 module.exports.shareTemplate = async () => {
     let buttons = await getAppButtons();
     let visit = Response.genWebUrlButton("Visit Website", dataStore.website);
-    buttons = [...buttons , visit];
+    buttons = [ ...buttons, visit ];
     return Response.genButtonTemplate("Please choose an option", buttons);
 };
 module.exports.MovingOutTemplate = () => {
-    let response = Response.genText("You are now moving out of my domain, just type a Hello in messenger to talk to me again");
+    let response = Response.genText("After clicking any of the above options you will be redirected to my friends, just type a Hello in messenger to talk to me again");
     return response;
-}
+};

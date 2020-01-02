@@ -9,6 +9,7 @@ const Service = require("./service");
 const Explore = require("./explore");
 const NewUser = require("./newUser");
 const Goal = require("./goal");
+const Assistance = require("./assistance");
 
 const Response = require("../response");
 const GraphAPi = require("../graph-api");
@@ -62,6 +63,8 @@ module.exports = class QuickReplyHandler {
             handler = new Existing(this.user, this.webhookEvent);
         } else if ( payload.includes("SERVICE") ) {
             handler = new Service(this.user, this.webhookEvent);
+        } else if ( payload.includes("ASSIST") ) {
+            handler = new Assistance(this.user, this.webhookEvent);
         } else if ( payload.includes("EXPLORE") ) {
             handler = new Explore(this.user, this.webhookEvent);
         } else if ( payload.includes("NEW") ) {

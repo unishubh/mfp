@@ -40,7 +40,7 @@
 		"prompt": "Please choose from an option below",
 		"need_service": "Need Service",
 		"invest_more": "Want to invest more?",
-		"explore": "Explore Options"
+		"assist": "Need Assistance"
 	},
 	"service": {
 		"prompt": "Open a service form",
