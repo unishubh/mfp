@@ -106,7 +106,7 @@ module.exports = {
     },
 
     get whitelistedDomains() {
-        return [this.appUrl, this.shopUrl, 'http://www.mutualfundcalculators.com', 'https://trinityinvestcon.com', 'https://www.smartscribs.com', 'https://unishubh.github.io','https://ec2-13-233-252-7.ap-south-1.compute.amazonaws.com'];
+        return [this.appUrl, this.shopUrl, 'http://www.mutualfundcalculators.com', 'https://trinityinvestcon.com', 'https://www.smartscribs.com', 'https://unishubh.github.io','https://mutualfundcalculator.in'];
     },
 
     checkEnvVariables: function() {

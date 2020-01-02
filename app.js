@@ -28,6 +28,13 @@ app.get("/", function (_req, res) {
 });
 
 //Add the apis
+app.post("/test", (req, res) => {
+
+	console.log("Testing");
+	res.status(200).send("Recieved");
+
+
+});
 app.get("/webhook", webhooks.webHookVerifier);
 app.post("/webhook", webhooks.webhookHandler);
 app.get("/profile", profile.profile);
