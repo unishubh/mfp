@@ -24,12 +24,17 @@ module.exports = class Investment {
                 );
                 response = Response.genButtonTemplate("Please fill out this form", [ button ]);
                 break;
-                
+
             case "INVEST": //TODO add investment options here
                 let web = await templates.investTemplateWebsite();
                 let mobile = await templates.investmentTemplateMobile();
                 let movingOut = templates.MovingOutTemplate();
-                response = [ mobile, web, movingOut ];
+                let assistance = Response.genQuickReply("Want more assistance ?", [ {
+                    title: "Need Assistance",
+                    payload: "ASSIST"
+                }
+                ]);
+                response = [ movingOut, mobile, web, assistance ];
                 //response = web;
 
                 break;

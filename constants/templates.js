@@ -52,6 +52,6 @@ module.exports.shareTemplate = async () => {
     return Response.genButtonTemplate("Please choose an option", buttons);
 };
 module.exports.MovingOutTemplate = () => {
-    let response = Response.genText("After clicking any of the above options you will be redirected to my friends, just type a Hello in messenger to talk to me again");
+    let response = Response.genText("External links will take you out of my domain, However you can anytime return to the char just by typing Hello");
     return response;
 };
