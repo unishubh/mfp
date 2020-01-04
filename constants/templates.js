@@ -6,6 +6,13 @@ let getAppButtons = module.exports.getAppButtons = async () => {
     let appStoreButton = Response.genWebUrlButton("Download  IOS App", dataStore.iosUrl);
     return [ playStoreButton, appStoreButton ];
 };
+let FacebookTemplate = module.exports.FacebookTemplate = async () => {
+    let buttons = [
+        Response.genWebUrlButton("FB Page", dataStore.fbPage),
+        Response.genWebUrlButton("FB Group", dataStore.fbGroup),
+    ];
+    return Response.genButtonTemplate("Connect with us on Facebook", buttons);
+};
 
 module.exports.generateInstantServiceTemplate = async () => {
     let callButton = await Response.genPhoneButton("Call us", dataStore.phone);
@@ -15,19 +22,25 @@ module.exports.generateInstantServiceTemplate = async () => {
     let appTemp = Response.genButtonTemplate("You can also try our app", appButtons);
     let text = Response.genText("Thanks for showing Interest in Investment with us , someone from the team will contact you in the next 24 Hour.\n")
     let abs = Response.genGenericTemplate(dataStore.GenericTemplateImage, i18n.__("service.title"), "", buttons);
+
     return [ text, abs, appTemp ];
 };
 
 module.exports.generateServiceResponseTemplate = async () => {
 
     let callButton = await Response.genPhoneButton("Call us", dataStore.phone);
-    let whatsAppButton = await Response.genPhoneButton("Whatsapp US", dataStore.phone);
+    let whatsAppButton = await Response.genWebUrlButton("Whatsapp US", dataStore.whatsApp);
     let appButtons = await getAppButtons();
     let buttons = [ callButton, whatsAppButton ];
     let appTemp = Response.genButtonTemplate("You can also try our app", appButtons);
     let text = Response.genText("Thanks for raising your concern, someone from the team will contact you in the next 24 Hours.")
     let abs = Response.genGenericTemplate(dataStore.GenericTemplateImage, i18n.__("service.title"), "", buttons);
-    return [ text, abs, appTemp ];
+    let fbButtons = [
+        Response.genWebUrlButton("FB Page", dataStore.fbPage),
+        Response.genWebUrlButton("FB Group", dataStore.fbGroup),
+    ];
+    let fbTemplate = Response.genButtonTemplate("Connect with us on Facebook", fbButtons);
+    return [ text, abs, appTemp, fbTemplate ];
 };
 
 module.exports.investmentTemplateMobile = async () => {
@@ -38,9 +51,9 @@ module.exports.investmentTemplateMobile = async () => {
 
 module.exports.investTemplateWebsite = async () => {
     let buttons = [
-        Response.genWebUrlButton("Invest in Saving Option", dataStore.calculatorLink),
-        Response.genWebUrlButton("Invest in tax Saving options", dataStore.calculatorLink),
-        Response.genWebUrlButton("Other investing options", dataStore.otherInvestmentsLink)
+        Response.genWebUrlButton("Invest in Saving Option", dataStore.investSaving),
+        Response.genWebUrlButton("Invest in tax Saving options", dataStore.investTaxSaving),
+        Response.genWebUrlButton("Other investing options", dataStore.investOthers),
     ];
     return Response.genButtonTemplate("Please choose an option", buttons);
 };
