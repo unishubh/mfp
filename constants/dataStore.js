@@ -63,16 +63,24 @@ module.exports.fundsLink = {
 module.exports.servieForm = "open.html";
 module.exports.investmentForm = "openInvestment.html";
 module.exports.GenericTemplateImage = fundLinkImage;
-module.exports.phone = "8989529628";
-module.exports.androidUrl = "https://www.smartscribs.com";
-module.exports.iosUrl = "https://www.smartscribs.com";
+module.exports.phone = "+919889715633";
+module.exports.whatsApp = "https://api.whatsapp.com/send?phone=919889715633";
+module.exports.androidUrl = "shorturl.at/wzCL6";
+module.exports.iosUrl = "https://apps.apple.com/in/app/fundconnect/id965208599";
 module.exports.calculatorLink = 'http://www.mutualfundcalculators.com';
 module.exports.otherInvestmentsLink = "https://trinityinvestcon.com/investment/mutual_funds/top-mf.html";
 module.exports.website = "trinityinvestcon.com";
 module.exports.goals = [
-    { name: "Retirement Planning", url: "https://www.smartscribs.com"},
-    { name: "Wealth Planning", url: "https://www.smartscribs.com"},
-        //{name: "Kids Planning", url: "https://www.smartscribs.com"},
-       {name: "Sip Planning", url: "https://www.smartscribs.com"},
-        // {name: "EMI Planning", url: "https://www.smartscribs.com"},
-    ];
+    {name: "Retirement Planning", url: "https://www.smartscribs.com"},
+    {name: "Wealth Planning", url: "https://www.smartscribs.com"},
+    //{name: "Kids Planning", url: "https://www.smartscribs.com"},
+    {name: "Sip Planning", url: "https://www.smartscribs.com"},
+    // {name: "EMI Planning", url: "https://www.smartscribs.com"},
+];
+
+module.exports.investSaving = "https://trinityinvestcon.com/liquid_fund/";
+module.exports.investTaxSaving = "https://trinityinvestcon.com/basket/elssbasket.html";
+module.exports.investOthers = "https://trinityinvestcon.com/investment/mutual_funds/top-mf.html";
+
+module.exports.fbPage = "https://www.facebook.com/mutualfundsiponline/";
+module.exports.fbGroup = "https://www.facebook.com/groups/niveshala/";

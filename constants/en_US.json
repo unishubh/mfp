@@ -6,7 +6,7 @@
     "nonmember": "You dont seem to be a member of trinity investcon or have not yet linked your account",
     "welcome": " Hi {{userFirstName}}!, {{greetings}} Welcome to Trinity Investcon. ",
     "intro": "You are chatting with {{botName}}, Your Personal Financial Assistant. ",
-    "question": "Please choose on of the options tp help us serve you better"
+    "question": "Please choose one of the options to help us serve you better"
   },
   "menu": {
     "calculate": "menu.calculate",
@@ -34,12 +34,12 @@
     "help": "care.help"
   },
   "fallback": {
-    "any": "fallback.any"
+    "any": "Sorry, I dont understand the command you sent"
   },
   "old": {
     "prompt": "Please choose from an option below",
     "need_service": "Need Service",
-    "invest_more": "Want to invest more?",
+    "invest_more": "Invest more",
     "explore": "Explore Now"
   },
   "service": {

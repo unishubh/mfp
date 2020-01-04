@@ -63,15 +63,10 @@
 
 
 <form id="myForm">
-    <input type="text" name="pan" placeholder="PAN">
-    <input type="text" name="ifsc" placeholder="IFSC">
-    <input type="text" name="name" placeholder="Name">
-    <input type="text" name="address" placeholder="Address">
-    <input type="date" name="dob" placeholder="Date of Birth">
-    <input type="text" name="nominee_name" placeholder="Nominee Name">
+
     <input type="tel" name="mobile" placeholder="Mobile Number">
     <input type="email" name="email" placeholder="Email ID">
-    <input type="text" name="bank" placeholder="Bank Account Number">
+    <input type="text" name="help" placeholder="Details of Help">
 
 
 </form>
@@ -84,15 +79,9 @@
         console.log("printing");
         let form = document.getElementById('myForm');
         let data = {
-            pan: form.elements['pan'].value,
-            ifsc: form.elements['ifsc'].value,
-            name: form.elements['name'].value,
-            address: form.elements['address'].value,
-            dob: form.elements['dob'].value,
-            nominee_name: form.elements['nominee_name'].value,
             mobile: form.elements['mobile'].value,
             email: form.elements['email'].value,
-            bank: form.elements['bank'].value,
+            details: form.elements['help'].value,
             uid: uid,
 
         };
