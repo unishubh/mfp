@@ -4,11 +4,18 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
 <!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <script>
 
     var uid = 5;
@@ -37,21 +44,63 @@
 
 </script>
 <body>
+<div id="container" style="margin: 5%">
+    <form id="myForm">
+        <fieldset class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" name="name">
+        </fieldset>
+        <fieldset class="form-group">
+            <label for="nominee_name">Nominee Name</label>
+            <input type="text" class="form-control" id="nominee_name" name="nominee_name">
+        </fieldset>
+        <fieldset class="form-group">
+            <label for="first_name">Mobile Number</label>
+            <input type="text" class="form-control" id="mobile" name="mobile">
+        </fieldset>
+        <fieldset class="form-group">
+            <label for="email">Email ID</label>
+            <input type="text" class="form-control" id="email" name="email">
+        </fieldset>
+        <fieldset class="form-group">
+            <label for="dob">Date of Birth</label>
+            <input type="text" class="form-control" id="dob" name="dob">
+        </fieldset>
+        <fieldset class="form-group">
+            <label for="address">Address</label>
+            <input type="text" class="form-control" id="address" name="address">
+        </fieldset>
+        <fieldset class="form-group">
+            <label for="bank">Bank Account Number</label>
+            <input type="text" class="form-control" id="bank" name="bank">
+        </fieldset>
+        <fieldset class="form-group">
+            <label for="pan">PAN</label>
+            <input type="text" class="form-control" id="pan" name="pan">
+        </fieldset>
+        <fieldset class="form-group">
+            <label for="ifsc">IFSC</label>
+            <input type="text" class="form-control" id="ifsc" name="ifsc">
+        </fieldset>
 
-<form id="myForm">
-    <input type="text" name="pan" placeholder="PAN">
-    <input type="text" name="ifsc" placeholder="IFSC">
-    <input type="text" name="name" placeholder="Name">
-    <input type="text" name="address" placeholder="Address">
-    <input type="date" name="dob" placeholder="Date of Birth">
-    <input type="text" name="nominee_name" placeholder="Nominee Name">
-    <input type="tel" name="mobile" placeholder="Mobile Number">
-    <input type="email" name="email" placeholder="Email ID">
-    <input type="text" name="bank" placeholder="Bank Account Number">
+
+    </form>
+    <button type="submit" onclick="submit()" class="btn btn-primary">Submit</button>
+</div>
+<!--<form id="myForm">-->
+<!--  //  <input type="text" name="pan" placeholder="PAN">-->
+<!--   // <input type="text" name="ifsc" placeholder="IFSC">-->
+<!--   // <input type="text" name="name" placeholder="Name">-->
+<!--   // <input type="text" name="address" placeholder="Address">-->
+<!--  //  <input type="date" name="dob" placeholder="Date of Birth">-->
+<!--   // <input type="text" name="nominee_name" placeholder="Nominee Name">-->
+<!--    //<input type="tel" name="mobile" placeholder="Mobile Number">-->
+<!--    //<input type="email" name="email" placeholder="Email ID">-->
+<!--   // <input type="text" name="bank" placeholder="Bank Account Number">-->
 
 
-</form>
-<button onclick="submit()">Submit</button>
+<!--</form>-->
+<!--<button onclick="submit()">Submit</button>-->
 <script>
     function submit () {
 

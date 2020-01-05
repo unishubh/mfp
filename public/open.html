@@ -2,6 +2,17 @@
 <html lang="en">
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
@@ -22,17 +33,14 @@
 
     window.extAsyncInit = function () {
         // the Messenger Extensions JS SDK is done loading
-        MessengerExtensions.getContext("479986662587387",function success (uids) {
+        MessengerExtensions.getContext("479986662587387", function success (uids) {
             console.log("Getting uid00");
             uid = uids.psid;
-             alert(uids.psid)
+            alert(uids.psid)
 
         });
 
     };
-
-
-
 
 
 </script>
@@ -40,17 +48,18 @@
 <!-- Load Facebook SDK for JavaScript -->
 <div id="fb-root"></div>
 <script>
-    window.fbAsyncInit = function() {
+    window.fbAsyncInit = function () {
         FB.init({
-            xfbml            : true,
-            version          : 'v5.0'
+            xfbml: true,
+            version: 'v5.0'
         });
     };
 
-    (function(d, s, id) {
+    (function (d, s, id) {
         var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
+        if ( d.getElementById(id) ) return;
+        js = d.createElement(s);
+        js.id = id;
         js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));</script>
@@ -61,16 +70,25 @@
      page_id="105643367493126">
 </div>
 
+<div id="container" style="margin: 5%">
+    <form id="myForm">
+        <fieldset class="form-group">
+            <label for="mobile">Mobile Number</label>
+            <input type="text" class="form-control" id="mobile" name="mobile">
+        </fieldset>
+        <fieldset class="form-group">
+            <label for="email">Email ID</label>
+            <input type="text" class="form-control" id="email" name="email">
+        </fieldset>
+        <fieldset class="form-group">
+            <label for="help">Details of Help</label>
+            <input type="text" class="form-control" id="help" name="help">
+        </fieldset>
 
-<form id="myForm">
 
-    <input type="tel" name="mobile" placeholder="Mobile Number">
-    <input type="email" name="email" placeholder="Email ID">
-    <input type="text" name="help" placeholder="Details of Help">
-
-
-</form>
-<button onclick="submit()">Submit</button>
+    </form>
+    <button type="submit" onclick="submit()" class="btn btn-primary">Submit</button>
+</div>
 <script>
     function submit () {
 
@@ -87,18 +105,18 @@
         };
         $.post("/nodejsApp/close",
             {
-                data:data,
+                data: data,
             },
-            function(data,status){
+            function (data, status) {
                 alert("Data: " + data + "\nStatus: " + status);
                 MessengerExtensions.requestCloseBrowser(function success () {
-                    }, function error (err) {
-                        console.log(err);
-                        // an error occurred
-                    });
+                }, function error (err) {
+                    console.log(err);
+                    // an error occurred
+                });
             });
         console.log(data);
-         //
+        //
 
 
     }
