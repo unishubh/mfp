@@ -8,27 +8,33 @@ const links = require("../../constants/dataStore");
 const templates = require("../../constants/templates");
 
 module.exports = class Assistance {
-   constructor (user, webhookEvent) {
-       this.user =user;
-       this.webhookEvent = webhookEvent;
-   }
-    handlePayload(payload) {
-       let responses ;
-       responses = Response.genQuickReply("Please select what sort of assistance do you need",
-           [
-               {
-                   title: "SIP Calculator",
-                   payload:"CALCULATOR"
-               },
-               {
-                   title:"Goal Planning",
-                   payload: "GOAL"
-               },
-               {
-                   title:"Personal Assistance",
-                   payload:"SERVICE"
-               }
-           ]);
-       return responses;
-   }
+    constructor (user, webhookEvent) {
+        this.user = user;
+        this.webhookEvent = webhookEvent;
+    }
+
+    handlePayload (payload) {
+        let responses;
+        responses = Response.genButtonTemplate("Please select what sort of assistance do you need", [
+            Response.genPostbackButton("SIP Calculator", "CALCULATOR"),
+            Response.genPostbackButton("Goal Planning", "GOAL"),
+            Response.genPostbackButton("Personal Assistance", "SERVICE"),
+        ]);
+        // responses = Response.genQuickReply("Please select what sort of assistance do you need",
+        //     [
+        //         {
+        //             title: "SIP Calculator",
+        //             payload: "CALCULATOR"
+        //         },
+        //         {
+        //             title: "Goal Planning",
+        //             payload: "GOAL"
+        //         },
+        //         {
+        //             title: "Personal Assistance",
+        //             payload: "SERVICE"
+        //         }
+        //     ]);
+        return responses;
+    }
 };

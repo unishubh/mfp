@@ -16,7 +16,7 @@ let FacebookTemplate = module.exports.FacebookTemplate = async () => {
 
 module.exports.generateInstantServiceTemplate = async () => {
     let callButton = await Response.genPhoneButton("Call us", dataStore.phone);
-    let whatsAppButton = await Response.genPhoneButton("Whatsapp US", dataStore.phone);
+    let whatsAppButton = await Response.genWebUrlButton("Whatsapp US", dataStore.whatsApp);
     let appButtons = await getAppButtons();
     let buttons = [ callButton, whatsAppButton ];
     let appTemp = Response.genButtonTemplate("You can also try our app", appButtons);

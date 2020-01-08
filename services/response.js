@@ -149,16 +149,15 @@ module.exports = class Response {
             botName: "MoneyBhai"
         }));
 
-        let isInvestor = this.genQuickReply(i18n.__("get_started.question"), [
-            {
-                title: "Already an investor",
-                payload: "OLD"
-            },
-            {
-                title: "New to investment",
-                payload: "NEW"
-            }
-
+        let isInvestor = this.genButtonTemplate(i18n.__("get_started.question"), [
+            Response.genPostbackButton(
+                "Already an investor",
+                "OLD"
+            ),
+            Response.genPostbackButton(
+                "New to investment",
+                "NEW"
+            ),
         ]);
         let nuxMessages = [ welcome, intro, isInvestor ];
 

@@ -25,19 +25,25 @@ module.exports = class Investment {
                 response = Response.genButtonTemplate("Please fill out this form", [ button ]);
                 break;
 
-            case "INVEST": //TODO add investment options here
+            case "KNOW_INVEST": //TODO add investment options here
                 let web = await templates.investTemplateWebsite();
                 let mobile = await templates.investmentTemplateMobile();
                 let movingOut = templates.MovingOutTemplate();
-                let assistance = Response.genQuickReply("Want more assistance ?", [ {
-                    title: "Need Assistance",
-                    payload: "ASSIST"
-                }
-                ]);
-                response = [ movingOut, mobile, web, assistance ];
+                response = [ movingOut, mobile, web ];
                 //response = web;
 
                 break;
+
+            case "INVEST":
+                let template = Response.genButtonTemplate("Already Know where to invest?", [
+                    Response.genPostbackButton("Yes, I know", "KNOW_INVEST")
+                ]);
+
+                let assistance = Response.genButtonTemplate("Want more assistance ?", [
+                    Response.genPostbackButton("I need assistance", "ASSIST")
+                ]);
+
+                response = [template, assistance];
         }
 
         return response;
