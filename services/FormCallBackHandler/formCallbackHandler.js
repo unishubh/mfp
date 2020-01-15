@@ -35,6 +35,9 @@ module.exports = class FormCallbackHandler {
                 }
             ])
         }
+        else if (payload === "ASSISTANCE") {
+            response = await templates.generateInstantServiceTemplate();
+        }
         return response;
     }
 };

@@ -16,7 +16,7 @@ module.exports = class Service {
         if ( payload === "SERVICE" ) {
             let button = Response.genWebUrlButtonExtension(
                 i18n.__("service.prompt"),
-                config.shopUrl + '/' + dataStore.servieForm,
+                config.shopUrl + '/' + dataStore.assistanceForm,
             );
 
             return Response.genButtonTemplate("Please fill out this form", [button]);

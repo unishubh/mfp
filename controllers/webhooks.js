@@ -4,6 +4,8 @@ const i18n = require('../i18n.config');
 const Receive = require('../services/receive');
 const Investcon = require('../services/investcon');
 let {User, users} = require('../services/user');
+const dbHandlerFetch = require('../dbHandlers/fetch');
+const dbHandlerInser = require('../dbHandlers/insert');
 //const users = User.users;
 
 let webhookHandler = async (req, res) => {
@@ -13,21 +15,21 @@ let webhookHandler = async (req, res) => {
     if ( body.object === "page" ) {
         res.status(200).send("EVENT_RECEIVED");
 
-        body.entry.forEach(function (entry) {
+        for ( const entry of body.entry ) {
             let webhookEvent = entry.messaging[0];
             if ( "read" in webhookEvent ) {
                 console.log("Got a read event");
-                return;
+                continue;
             }
 
             if ( "delivery" in webhookEvent ) {
                 console.log("Got a delivery event");
-                return;
+                continue;
             }
 
             let senderPsid = webhookEvent.sender.id;
-
-            if ( !(senderPsid in users) ) {
+            userExists = await dbHandlerFetch.getUser(senderPsid);
+            if ( userExists === 0 ) {
                 let user = new User(senderPsid);
 
                 GraphAPi.getUserProfile(senderPsid)
@@ -49,22 +51,24 @@ let webhookHandler = async (req, res) => {
                             "with locale:",
                             i18n.getLocale()
                         );
+                        dbHandlerInser.insertUser(user.firstName + " " + user.lastName, user.psid, user.email, user.phone, user.gender);
                         users[senderPsid].presentCommand = webhookEvent;
                         let receiveMessage = new Receive(users[senderPsid], webhookEvent);
                         return receiveMessage.handleMessage();
 
                     });
             } else {
+                users[senderPsid] = userExists;
                 users[senderPsid].secondLastCommand = users[senderPsid].lastCommand;
                 users[senderPsid].lastCommand = users[senderPsid].presentCommand;
                 users[senderPsid].presentCommand = webhookEvent;
                 if ( isBackCommand(webhookEvent) ) {
                     if ( users[senderPsid].secondLastCommand !== "" ) {
                         let receiveMessage = new Receive(users[senderPsid], users[senderPsid].secondLastCommand);
-                        return receiveMessage.handleMessage();
+                        receiveMessage.handleMessage();
                     } else {
                         let receiveMessage = new Receive(users[senderPsid], users[senderPsid].lastCommand);
-                        return receiveMessage.handleMessage();
+                        receiveMessage.handleMessage();
                     }
 
                 }
@@ -77,10 +81,10 @@ let webhookHandler = async (req, res) => {
                     i18n.getLocale()
                 );
                 let receiveMessage = new Receive(users[senderPsid], webhookEvent);
-                return receiveMessage.handleMessage();
+                receiveMessage.handleMessage();
             }
 
-        });
+        }
     } else {
         // Returns a '404 Not Found' if event is not from a page subscription
         res.sendStatus(404);
@@ -129,9 +133,23 @@ let investFormHandler = async (req, res) => {
     res.status(200).send("Recieved");
     console.log(req.body);
     let userObj = users[req.body.data.uid];
+    dbHandlerInser.insertAssistanceRequest(req.body.data.uid, req.body.data.email, req.body.data.mobile, req.body.data.city, req.body.data.investment);
     let receiveMessage = new Receive(userObj, req.body);
     return receiveMessage.handleMessage();
 };
+
+let assistanceRequestHandler = async (req, res) => {
+    req.body.formCallBack = true;
+    req.body.formType = "ASSISTANCE";
+    res.status(200).send("Recieved");
+    console.log(req.body);
+    let userObj = users[req.body.data.uid];
+    await dbHandlerInser.insertAssistanceRequest(req.body.data.uid, req.body.data.email, req.body.data.mobile, req.body.data.city, req.body.data.investment);
+    let receiveMessage = new Receive(userObj, req.body);
+    return receiveMessage.handleMessage();
+};
+
+
 let isBackCommand = (webhookEvent) => {
 
     try {
@@ -149,4 +167,5 @@ module.exports = {
     users,
     riskHandler,
     investFormHandler,
+    assistanceRequestHandler,
 };

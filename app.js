@@ -12,6 +12,7 @@ const i18n = require("./i18n.config");
 const app = express();
 const webhooks = require('./controllers/webhooks');
 const profile = require('./controllers/profile');
+const dbHandlerInsert = require("./dbHandlers/insert");
 
 // Parse application/x-www-form-urlencoded
 app.use(
@@ -30,8 +31,8 @@ app.get("/", function (_req, res) {
 //Add the apis
 app.post("/test", (req, res) => {
 
-	console.log("Testing");
-	res.status(200).send("Recieved");
+    console.log("Testing");
+    res.status(200).send("Recieved");
 
 
 });
@@ -39,13 +40,15 @@ app.get("/webhook", webhooks.webHookVerifier);
 app.post("/webhook", webhooks.webhookHandler);
 app.get("/profile", profile.profile);
 app.post("/risk", webhooks.riskHandler);
-app.post('/close', function (req, res) {
+app.post("/personalAssistance", webhooks.assistanceRequestHandler);
+app.post('/close', async function (req, res) {
 
     req.body.formCallBack = true;
     req.body.formType = "SERVICE";
     res.status(200).send("Recieved");
     console.log(req.body);
     let userObj = User.getUser(req.body.data.uid);
+    dbHandlerInsert.insertServiceRequest(req.body.data.uid, req.body.data.details);
     let receiveMessage = new Receive(userObj, req.body);
     return receiveMessage.handleMessage();
 

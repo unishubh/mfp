@@ -13,6 +13,13 @@ module.exports = class NewUser {
     }
 
     handlePayload () {
+        // let reponse = Response.genButtonTemplate("Please choose an option from below", [
+        //     Response.genPostbackButton("Open an investment account", "OPEN_INVESTMENT_ACCOUNT"),
+        //     Response.genPostbackButton("Know your Risk Degree", "RISK"),
+        //     Response.genPostbackButton("Plan your Goals", "GOAL"),
+        //     Response.genPostbackButton("Use Calculators and explore more", "EXPLORE"),
+        // ]);
+        // return reponse;
         let response = Response.genQuickReply("Please choose an option from below", [
             {
                 title: "Open an investment account",

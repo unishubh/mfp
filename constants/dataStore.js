@@ -61,6 +61,7 @@ module.exports.fundsLink = {
 };
 
 module.exports.servieForm = "open.html";
+module.exports.assistanceForm = "personalAssistance.html";
 module.exports.investmentForm = "openInvestment.html";
 module.exports.GenericTemplateImage = fundLinkImage;
 module.exports.phone = "+919889715633";

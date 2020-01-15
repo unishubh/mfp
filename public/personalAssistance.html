@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+
+    var uid = 5;
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if ( d.getElementById(id) ) {
+            return;
+        }
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//connect.facebook.com/en_US/messenger.Extensions.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, "script", "Messenger"));
+
+    window.extAsyncInit = function () {
+        // the Messenger Extensions JS SDK is done loading
+        MessengerExtensions.getContext("479986662587387", function success (uids) {
+            console.log("Getting uid00");
+            uid = uids.psid;
+            alert(uids.psid)
+
+        });
+
+    };
+
+
+</script>
+
+<!-- Load Facebook SDK for JavaScript -->
+<div id="fb-root"></div>
+<script>
+    window.fbAsyncInit = function () {
+        FB.init({
+            xfbml: true,
+            version: 'v5.0'
+        });
+    };
+
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if ( d.getElementById(id) ) return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+
+<!-- Your customer chat code -->
+<div class="fb-customerchat"
+     attribution=setup_tool
+     page_id="105643367493126">
+</div>
+
+<div id="container" style="margin: 5%">
+    <form id="myForm">
+        <fieldset class="form-group">
+            <label for="mobile">Mobile Number</label>
+            <input type="text" class="form-control" id="mobile" name="mobile">
+        </fieldset>
+        <fieldset class="form-group">
+            <label for="email">Email ID</label>
+            <input type="text" class="form-control" id="email" name="email">
+        </fieldset>
+        <fieldset class="form-group">
+            <label for="city">City</label>
+            <input type="text" class="form-control" id="city" name="city">
+        </fieldset>
+        <fieldset class="form-group">
+            <label for="investment">Investment Details</label>
+            <input type="text" class="form-control" id="investment" name="investment">
+        </fieldset>
+    </form>
+    <button type="submit" onclick="submit()" class="btn btn-primary">Submit</button>
+</div>
+<script>
+    function submit () {
+
+
+        //  alert("pritin");
+        console.log("printing");
+        let form = document.getElementById('myForm');
+        let data = {
+            mobile: form.elements['mobile'].value,
+            email: form.elements['email'].value,
+            city: form.elements['city'].value,
+            investment: form.elements['investment'].value,
+            uid: uid,
+
+        };
+        $.post("/personalAssistance",
+            {
+                data: data,
+            },
+            function (data, status) {
+                alert("Data: " + data + "\nStatus: " + status);
+                MessengerExtensions.requestCloseBrowser(function success () {
+                }, function error (err) {
+                    console.log(err);
+                    // an error occurred
+                });
+            });
+        console.log(data);
+        //
+
+
+    }
+</script>
+</body>
+</html>
+
+
+<!--<!DOCTYPE html>-->
+<!--<html>-->
+<!--<body>-->
+
+<!--        <form id="myForm">-->
+<!--            <input type="text" name="pan">-->
+<!--            <input type="text" name="ifsc">-->
+
+<!--        </form>-->
+<!--        <button onclick="myFunction()">Submit</button>-->
+
+<!--<button onclick="myFunction()">Click me</button>-->
+
+<!--<p id="demo"></p>-->
+
+<!--<script>-->
+<!--    function myFunction() {-->
+<!--        document.getElementById("demo").innerHTML = "Hello World";-->
+<!--    }-->
+<!--</script>-->
+
+<!--</body>-->
+</html>
