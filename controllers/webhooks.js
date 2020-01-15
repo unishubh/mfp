@@ -133,7 +133,7 @@ let investFormHandler = async (req, res) => {
     res.status(200).send("Recieved");
     console.log(req.body);
     let userObj = users[req.body.data.uid];
-    dbHandlerInser.insertAssistanceRequest(req.body.data.uid, req.body.data.email, req.body.data.mobile, req.body.data.city, req.body.data.investment);
+    dbHandlerInser.insertInvestmentAccountRequest(req.body.data.uid, req.body.data.dob, req.body.data.address, req.body.data.mobile, req.body.data.email, req.body.data.nominee_name, req.body.data.bank, req.body.data.pan, req.body.data.ifsc);
     let receiveMessage = new Receive(userObj, req.body);
     return receiveMessage.handleMessage();
 };

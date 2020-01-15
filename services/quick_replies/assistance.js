@@ -18,7 +18,7 @@ module.exports = class Assistance {
         responses = Response.genButtonTemplate("Please select what sort of assistance do you need", [
             Response.genPostbackButton("SIP Calculator", "CALCULATOR"),
             Response.genPostbackButton("Goal Planning", "GOAL"),
-            Response.genPostbackButton("Personal Assistance", "SERVICE"),
+            Response.genPostbackButton("Personal Assistance", "PERSONAL_SERVICE"),
         ]);
         // responses = Response.genQuickReply("Please select what sort of assistance do you need",
         //     [

@@ -1,67 +1,68 @@
 {
-  "get_started": {
-    "guidance": "get_started.guidance",
-    "help": "get_started.help",
-    "isInvestor": "Are you already an investor?",
-    "nonmember": "You dont seem to be a member of trinity investcon or have not yet linked your account",
-    "welcome": " Hi {{userFirstName}}!, {{greetings}} Welcome to Trinity Investcon. ",
-    "intro": "You are chatting with {{botName}}, Your Personal Financial Assistant. ",
-    "question": "Please choose one of the options to help us serve you better"
-  },
-  "menu": {
-    "calculate": "menu.calculate",
-    "invest": "menu.invest",
-    "support": "menu.support",
-    "nonInvestor": "menu.nonInvestor",
-    "intro": "menu.intro",
-    "risk": "menu.risk",
-    "plan": "menu.plan",
-    "order": "menu.order",
-    "help": "menu.help",
-    "suggestion": "menu.suggestion",
-    "shop": "menu.shop",
-    "investor": "menu.investor"
-  },
-  "risk": {
-    "take_risk_analysis": {
-      "prompt": "risk.take_risk_analysis.prompt"
-    }
-  },
-  "profile": {
-    "greeting": "profile.greeting"
-  },
-  "care": {
-    "help": "care.help"
-  },
-  "fallback": {
-    "any": "Sorry, I dont understand the command you sent"
-  },
-  "old": {
-    "prompt": "Please choose from an option below",
-    "need_service": "Need Service",
-    "invest_more": "Invest more",
-    "explore": "Explore Now"
-  },
-  "service": {
-    "prompt": "Open a service form",
-    "thanks": "Thanks for raising your concern, someone from the team will contact you in the next 24 Hour. ",
-    "title": "In case of instant support-\n"
-  },
-  "calculator": {
-    "prompt": "Click here to open calculator in the webview"
-  },
-  "invest": {
-    "action": "invest.action",
-    "register": "invest.register",
-    "choose_funds": "invest.choose_funds",
-    "open_investment_account": "invest.open_investment_account"
-  },
-  "Open account form": "Open account form",
-  "plan": {
-    "prompt": "plan.prompt",
-    "education": "plan.education",
-    "sip": "plan.sip",
-    "retirement": "plan.retirement",
-    "wealth": "plan.wealth"
-  }
+	"get_started": {
+		"guidance": "get_started.guidance",
+		"help": "get_started.help",
+		"isInvestor": "Are you already an investor?",
+		"nonmember": "You dont seem to be a member of trinity investcon or have not yet linked your account",
+		"welcome": " Hi {{userFirstName}}!, {{greetings}} Welcome to Trinity Investcon. ",
+		"intro": "You are chatting with {{botName}}, Your Personal Financial Assistant. ",
+		"question": "Please choose one of the options to help us serve you better"
+	},
+	"menu": {
+		"calculate": "menu.calculate",
+		"invest": "menu.invest",
+		"support": "menu.support",
+		"nonInvestor": "menu.nonInvestor",
+		"intro": "menu.intro",
+		"risk": "menu.risk",
+		"plan": "menu.plan",
+		"order": "menu.order",
+		"help": "menu.help",
+		"suggestion": "menu.suggestion",
+		"shop": "menu.shop",
+		"investor": "menu.investor"
+	},
+	"risk": {
+		"take_risk_analysis": {
+			"prompt": "risk.take_risk_analysis.prompt"
+		}
+	},
+	"profile": {
+		"greeting": "profile.greeting"
+	},
+	"care": {
+		"help": "care.help"
+	},
+	"fallback": {
+		"any": "Sorry, I dont understand the command you sent"
+	},
+	"old": {
+		"prompt": "Please choose from an option below",
+		"need_service": "Need Service",
+		"invest_more": "Invest more",
+		"explore": "Explore Now"
+	},
+	"service": {
+		"prompt": "Open a Service Form",
+		"thanks": "Thanks for raising your concern, someone from the team will contact you in the next 24 Hour. ",
+		"title": "In case of instant support-\n"
+	},
+	"calculator": {
+		"prompt": "Click here to open calculator in the webview"
+	},
+	"invest": {
+		"action": "invest.action",
+		"register": "invest.register",
+		"choose_funds": "invest.choose_funds",
+		"open_investment_account": "invest.open_investment_account"
+	},
+	"Open account form": "Open account form",
+	"plan": {
+		"prompt": "plan.prompt",
+		"education": "plan.education",
+		"sip": "plan.sip",
+		"retirement": "plan.retirement",
+		"wealth": "plan.wealth"
+	},
+	"Book your Slot with our Experts": "Book your Slot with our Experts"
 }

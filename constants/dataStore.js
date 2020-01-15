@@ -72,11 +72,11 @@ module.exports.calculatorLink = 'http://www.mutualfundcalculators.com';
 module.exports.otherInvestmentsLink = "https://trinityinvestcon.com/investment/mutual_funds/top-mf.html";
 module.exports.website = "trinityinvestcon.com";
 module.exports.goals = [
-    {name: "Retirement Planning", url: "https://www.smartscribs.com"},
-    {name: "Wealth Planning", url: "https://www.smartscribs.com"},
+    {name: "Retirement Planning", url: "https://trinityinvestcon.com/planning/retirement/"},
+    {name: "Wealth Planning", url: "http://mutualfundcalculators.com/wealth.html"},
     //{name: "Kids Planning", url: "https://www.smartscribs.com"},
-    {name: "Sip Planning", url: "https://www.smartscribs.com"},
-    // {name: "EMI Planning", url: "https://www.smartscribs.com"},
+    //{name: "Sip Planning", url: "https://www.smartscribs.com"},
+     {name: "EMI Planning", url: "http://mutualfundcalculators.com/emi.html"},
 ];
 
 module.exports.investSaving = "https://trinityinvestcon.com/liquid_fund/";

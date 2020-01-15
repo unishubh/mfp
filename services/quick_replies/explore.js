@@ -21,13 +21,11 @@ module.exports = class Explore {
             Response.genPostbackButton("Goal Planning","GOAL")
         ]);
 
-        let studyTemplate = Response.genButtonTemplate("Know more about Mutual Funds", [
-            Response.genWebUrlButton("Blog", "https://www.smartscribs.com"),
-            Response.genWebUrlButton("Videos", "https://www.smartscribs.com")
-        ]);
+        let studyTemplate =  templates.studyTemplate;
         let template = await templates.shareTemplate();
+        let callTemplate = await templates.whatsAppandCallButton();
 
-        return [ studyTemplate, template, response ];
+        return [ studyTemplate, template, response, callTemplate ];
 
 
     }

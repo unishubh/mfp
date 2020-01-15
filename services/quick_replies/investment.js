@@ -39,7 +39,7 @@ module.exports = class Investment {
                     Response.genPostbackButton("Yes, I know", "KNOW_INVEST")
                 ]);
 
-                let assistance = Response.genButtonTemplate("Want more assistance ?", [
+                let assistance = Response.genButtonTemplate("Need assistance in Investing ?", [
                     Response.genPostbackButton("I need assistance", "ASSIST")
                 ]);
 

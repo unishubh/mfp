@@ -12,8 +12,11 @@ module.exports.getUser = async (fbID) => {
                     console.log("No user found for fbID ", fbID);
                     resolve(0);
                 } else {
+                    data = data[0];
                     console.log("Unique user found for ", fbID);
                     let user = new User(fbID);
+                    user.firstName = data.name.substring(0, data.name.indexOf(' '));
+                    user.lastName = data.name.substring(data.name.indexOf(' '));
                     user.email = data.email;
                     user.phone = data.phone;
                     user.gender = data.gender;

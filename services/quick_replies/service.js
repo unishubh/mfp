@@ -15,14 +15,21 @@ module.exports = class Service {
 
         if ( payload === "SERVICE" ) {
             let button = Response.genWebUrlButtonExtension(
-                i18n.__("service.prompt"),
-                config.shopUrl + '/' + dataStore.assistanceForm,
+                i18n.__("Fill the form"),
+                config.shopUrl + '/' + dataStore.servieForm,
             );
 
             return Response.genButtonTemplate("Please fill out this form", [button]);
 
 
-        } else {
+        } else if (payload === "PERSONAL_SERVICE") {
+            let button = Response.genWebUrlButtonExtension(
+                i18n.__("Fill the form"),
+                config.shopUrl + '/' + dataStore.assistanceForm,
+            );
+            return Response.genButtonTemplate("Book a slot with our experts", [button]);
+        }
+        else {
             console.log("Not a valid service");
         }
     };
