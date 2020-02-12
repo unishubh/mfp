@@ -15,8 +15,6 @@ module.exports = class Profile {
     setThread() {
         let profilePayload = {
             ...this.getGetStarted(),
-            ...this.getGreeting(),
-            ...this.getPersistentMenu()
         };
 
         GraphAPi.callMessengerProfileAPI(profilePayload);
@@ -73,6 +71,7 @@ module.exports = class Profile {
     setPersistentMenu() {
         let menuPayload = this.getPersistentMenu();
         GraphAPi.callMessengerProfileAPI(menuPayload);
+
     }
 
     setWhitelistedDomains() {
