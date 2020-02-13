@@ -13,6 +13,7 @@
 
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="./js/getter.js"></script>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
@@ -103,7 +104,7 @@
             email: form.elements['email'].value,
             city: form.elements['city'].value,
             investment: form.elements['investment'].value,
-            uid: uid,
+            uid: getVariables(window.location.href, document),
 
         };
         $.post("/nodejsApp/personalAssistance",
@@ -111,14 +112,14 @@
                 data: data,
             },
             function (data, status) {
-                alert("Data: " + data + "\nStatus: " + status);
+                alert("Your response recorded successfully, if the form opened on a new tab, you can close it and move back to the origin tab.");
                 MessengerExtensions.requestCloseBrowser(function success () {
                 }, function error (err) {
                     console.log(err);
                     // an error occurred
                 });
             });
-        console.log(data);
+        console.log("Your response recorded successfully, if the form opened on a new tab, you can close it and move back to the origin tab.");
         //
 
 

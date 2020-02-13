@@ -16,7 +16,7 @@ module.exports = class Service {
         if ( payload === "SERVICE" ) {
             let button = Response.genWebUrlButtonExtension(
                 i18n.__("Fill the form"),
-                config.shopUrl + '/' + dataStore.servieForm,
+                config.shopUrl + '/' + dataStore.servieForm+"?psid="+this.user.psid,
             );
 
             return Response.genButtonTemplate("Please fill out this form", [button]);
@@ -25,7 +25,7 @@ module.exports = class Service {
         } else if (payload === "PERSONAL_SERVICE") {
             let button = Response.genWebUrlButtonExtension(
                 i18n.__("Fill the form"),
-                config.shopUrl + '/' + dataStore.assistanceForm,
+                config.shopUrl + '/' + dataStore.assistanceForm+"?psid="+this.user.psid,
             );
             return Response.genButtonTemplate("Book a slot with our experts", [button]);
         }

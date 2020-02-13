@@ -20,7 +20,7 @@ module.exports = class Investment {
             case "OPEN_INVESTMENT_ACCOUNT":
                 let button = Response.genWebUrlButtonExtension(
                     i18n.__("Open account form"),
-                    config.shopUrl + '/' + links.investmentForm,
+                    config.shopUrl + '/' + links.investmentForm+"?psid="+this.user.psid,
                 );
                 response = Response.genButtonTemplate("Please fill out this form", [ button ]);
                 break;
