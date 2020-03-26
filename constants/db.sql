@@ -2,6 +2,7 @@ create database bot;
 
 create table Users (
 id INT NOT NULL AUTO_INCREMENT,
+client_id BIGINT(20) NOT NULL,
 name VARCHAR(100) NOT NULL,
 fbid BIGINT(20) NOT NULL,
 email VARCHAR(100),
@@ -14,6 +15,7 @@ PRIMARY KEY ( id )
 create table Messages (
 id INT NOT NULL AUTO_INCREMENT,
 user_id BIGINT(20) NOT NULL,
+client_id BIGINT(20) NOT NULL,
 type VARCHAR(50) NOT NULL,
 message VARCHAR(100) NOT NULL,
 sent_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -23,16 +25,18 @@ PRIMARY KEY ( id )
 create table Service_requests (
 id INT NOT NULL AUTO_INCREMENT,
 user_id BIGINT(20) NOT NULL,
+client_id BIGINT(20) NOT NULL,
 details VARCHAR(5000) NOT NULL,
 time_received TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 is_resolved BOOL DEFAULT FALSE,
-resolved_at TIMESTAMP,
+resolved_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 PRIMARY KEY ( id )
 );
 
 create table Investment_account (
 id INT NOT NULL AUTO_INCREMENT,
 user_id BIGINT(20) NOT NULL,
+client_id BIGINT(20) NOT NULL,
 dob VARCHAR(10) NOT NULL,
 address  VARCHAR(100) NOT NULL,
 mobile VARCHAR(20) NOT NULL,
@@ -48,6 +52,7 @@ PRIMARY KEY ( id )
 create table Assistance_requests (
 id INT NOT NULL AUTO_INCREMENT,
 user_id BIGINT(20) NOT NULL,
+client_id BIGINT(20) NOT NULL,
 email VARCHAR(100) NOT NULL,
 phone VARCHAR(20) NOT NULL,
 city VARCHAR(20) NOT NULL,
@@ -56,5 +61,12 @@ time_received TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 PRIMARY KEY ( id )
 );
 
-CREATE USER shubh@localhost IDENTIFIED BY 'password';
-GRANT ALL PRIVILEGES ON bot.* TO shubh@localhost;
+create TABLE Client (
+    id INT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY ( id )
+);
+
+CREATE USER rini@localhost IDENTIFIED BY 'ani777 ';
+GRANT ALL PRIVILEGES ON bot.* TO rini@localhost;

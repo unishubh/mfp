@@ -13,6 +13,7 @@ const app = express();
 const webhooks = require('./controllers/webhooks');
 const profile = require('./controllers/profile');
 const dbHandlerInsert = require("./dbHandlers/insert");
+const clients = require('./controllers/client');
 
 // Parse application/x-www-form-urlencoded
 app.use(
@@ -36,6 +37,10 @@ app.post("/test", (req, res) => {
 
 
 });
+console.log("check");
+app.get("/users/:id", clients.clientUsersHandler);
+app.get("/messages/:id", clients.clientMessageHandler);
+app.get("/services/:id", clients.clientServiceHandler);
 app.get("/webhook", webhooks.webHookVerifier);
 app.post("/webhook", webhooks.webhookHandler);
 app.get("/profile", profile.profile);
