@@ -1,15 +1,24 @@
 {
+  "scripts": {
+    "server": "node app.js",
+    "mfp-frontend": "npm start --prefix mfp-frontend",
+    "dev": "concurrently \"npm run server\" \"npm run mfp-frontend\""
+  },
   "dependencies": {
     "body-parser": "^1.19.0",
     "camelcase": "^5.3.1",
+    "concurrently": "^5.1.0",
+    "cors": "^2.8.5",
     "crypto": "^1.0.1",
     "dotenv": "^8.1.0",
     "ejs": "^2.7.1",
     "express": "^4.17.1",
     "i18n": "^0.8.3",
+    "jsonwebtoken": "^8.5.1",
     "localtunnel": "^1.9.2",
     "mysql": "^2.18.1",
     "ngrok": "^3.2.5",
+    "nodemon": "^2.0.2",
     "path": "^0.12.7",
     "request": "^2.88.0"
   }
