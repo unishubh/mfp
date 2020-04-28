@@ -1,9 +1,4 @@
 {
-  "scripts": {
-    "server": "node app.js",
-    "mfp-frontend": "npm start --prefix mfp-frontend",
-    "dev": "concurrently \"npm run server\" \"npm run mfp-frontend\""
-  },
   "dependencies": {
     "body-parser": "^1.19.0",
     "camelcase": "^5.3.1",
