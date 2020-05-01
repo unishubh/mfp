@@ -37,7 +37,7 @@ module.exports = {
     personas: {},
 
     // Preferred port (default to 3000)
-    port: process.env.PORT || 3000,
+    port: process.env.port || 3000,
 
     get mPlatfom() {
         return this.mPlatformDomain + "/" + this.mPlatformVersion;

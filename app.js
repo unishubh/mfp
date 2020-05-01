@@ -13,6 +13,9 @@ const app = express();
 const webhooks = require('./controllers/webhooks');
 const profile = require('./controllers/profile');
 const dbHandlerInsert = require("./dbHandlers/insert");
+const clients = require('./controllers/client');
+const verifyToken = require("./clientApi/tokenVerification");
+const cors = require('cors');
 
 // Parse application/x-www-form-urlencoded
 app.use(
@@ -20,6 +23,8 @@ app.use(
         extended: true
     })
 );
+
+app.use(cors());
 
 app.use(json({verify: verifyRequestSignature}));
 app.use(express.static(path.join(path.resolve(), "public")));
@@ -36,6 +41,11 @@ app.post("/test", (req, res) => {
 
 
 });
+console.log("check");
+app.post("/users",verifyToken, clients.clientUsersHandler);
+app.post("/messages",verifyToken, clients.clientMessageHandler);
+app.post("/services",verifyToken, clients.clientServiceHandler);
+app.post("/login", clients.handleClientLogin);
 app.get("/webhook", webhooks.webHookVerifier);
 app.post("/webhook", webhooks.webhookHandler);
 app.get("/profile", profile.profile);
