@@ -14,6 +14,7 @@ const webhooks = require('./controllers/webhooks');
 const profile = require('./controllers/profile');
 const dbHandlerInsert = require("./dbHandlers/insert");
 const clients = require('./controllers/client');
+const clientDashboard = require('./controllers/clientDashboard');
 const verifyToken = require("./clientApi/tokenVerification");
 const cors = require('cors');
 
@@ -46,6 +47,7 @@ app.post("/users",verifyToken, clients.clientUsersHandler);
 app.post("/messages",verifyToken, clients.clientMessageHandler);
 app.post("/services",verifyToken, clients.clientServiceHandler);
 app.post("/login", clients.handleClientLogin);
+app.post("/infoBox",verifyToken, clientDashboard.infoBoxHandler);
 app.get("/webhook", webhooks.webHookVerifier);
 app.post("/webhook", webhooks.webhookHandler);
 app.get("/profile", profile.profile);
