@@ -128,16 +128,17 @@ module.exports = class GraphAPi {
             let body = [];
 
             // Send the HTTP request to the Graph API
+            console.log(`${config.mPlatfom}/${senderPsid}`);
             request ({
                 uri: `${config.mPlatfom}/${senderPsid}`,
                 qs: {
                     access_token: config.pageAccesToken,
-                    fields: "first_name, last_name, gender, locale, timezone"
+                    fields: "first_name, last_name,locale,email"
                 },
                 method: "GET"
             })
                 .on ("response", function (response) {
-                    // console.log(response.statusCode);
+                     console.log(response.statusCode);
 
                     if (response.statusCode !== 200) {
                         reject (Error (response.statusCode));
