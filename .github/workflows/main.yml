@@ -24,10 +24,4 @@ jobs:
 
     # Runs a single command using the runners shell
     - name: Run a who am I command
-      uses: appleboy/ssh-action@master
-      with:
-        host: 13.234.195.50
-        username: ubuntu
-        key: ${{ secrets.KEY }}
-        port: 22
-        script: whoami
+      run: ssh -i ${{secrets.KEY}} -o StrictHostKeyChecking=no &&  
