@@ -26,7 +26,7 @@ jobs:
     - name: Run a who am I command
       uses: appleboy/ssh-action@master
       with:
-      - host: 13.234.195.50
+        host: 13.234.195.50
         username: ubuntu
         key: ${{ secrets.ssh_key }}
         port: 22
