@@ -24,4 +24,4 @@ jobs:
 
     # Runs a single command using the runners shell
     - name: Run a who am I command
-      run: ssh -i ${{secrets.KEY}} -o StrictHostKeyChecking=no &&  
+      run: ssh -i ${{secrets.KEY}} ubuntu@13.234.195.50 -o StrictHostKeyChecking=no &&  
