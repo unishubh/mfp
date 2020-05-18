@@ -19,14 +19,17 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - uses: actions/checkout@v2
-      name: Setup key
-      env:
+      - uses: actions/checkout@v1
+        with:
+          ref: master
+          fetch-depth: 1
+
+      - name: Setup key
+        env:
           ECD_KEY: ${{ secrets.KEY }}
-      run: |
-          echo "$ECD_KEY" > $HOME/ecd
+        run: |
+          echo "$ECD_KEY"  > $HOME/ecd
           chmod 400 $HOME/ecd
     # Runs a single command using the runners shell
-    - name: Run a who am I command
-      run: ssh -i $HOME/ecd ubuntu@13.234.195.50 -o StrictHostKeyChecking=no 'whoami'
+      - name: Run a who am I command
+        run: ssh -i $HOME/ecd ubuntu@13.234.195.50 -o StrictHostKeyChecking=no 'whoami'
